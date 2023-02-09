@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pi Calculator</title>
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Rubik', sans-serif;
+			margin: 0;
+		}
+
+		h1 {
+			background-color: rgb(98, 26, 171);
+			color: white;
+			width: 100%;
+			text-align: center;
+			padding: 10px;
+			margin:0;
+			margin-bottom: 20px;
+		}
+		
+		main {
+			padding: 10px;
+		}
+
+		canvas {
+			border: 1px solid black;
+			border-radius: 2px;
+			overflow: hidden;
+			resize: both;
+		}
+
+		button {
+			font-size: 24pt;
+			padding: 10px 30px;
+			cursor: pointer;
+		}
+
+		code {
+			background-color: rgb(233, 233, 233);
+			border-radius: 5px;
+			padding: 2px 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Pi Calculator</h1>
+
+	<main>
+		<canvas id="graph"></canvas>
+		<p>Axes: X: Verts (verts=100+x*100,000), Y: Duration (milliseconds)</p>
+		<br>
+		<label for="graphScaleX">Graph Scale X:</label>
+		<input type="number" name="graphScaleX" id="graphScaleX" value="2" step="0.25">
+		<br>
+		<label for="graphScaleY">Graph Scale Y:</label>
+		<input type="number" name="graphScaleY" id="graphScaleY" value="2" step="0.25">
+		<hr>
+		<button onclick="genData()">Run!</button>
+		<hr>
+		<h2>About</h2>
+		<p>This website doesn't just calculate pi, it calculates pi many times with different accuracy, and plots the data on a graph.</p>
+		<p>The algorithm I use to calculate pi is a simple one I thought of (probably not very efficient):</p>
+		<ol>
+			<li>Make a half-circle with the function <code>Math.sqrt(1-x**2)</code></li>
+			<li>Make <code>verts</code> number of equally spaced vertical lines from -1 to 1 with this function: <code>x=-1+(i*2)/(verts-1)</code></li>
+			<li>Put all of the points where the lines intersect with the half-circle into the <code>points</code> array (I use "verts" and "points" interchangeably)</li>
+			<li>Add up the distances between each point</li>
+			<li>It's (close to) pi!</li>
+			<li>The more vertices the more accurate</li>
+		</ol>
+		<p>My JavaScript implementation is at <a href="https://github.com/CalSch/pi-calculator/pi.js">pi.js</a></p>
+		
+	</main>
+
+	<footer>
+		<p>By <a href="https://calsch.github.io/">CalSch</a></p>
+		<p><a href="https://github.com/CalSch/pi-calculator">Repo</a></p>
+	</footer>
+
+	<script defer src="pi.js"></script>
+	<script defer src="graph.js"></script>
+	<script defer src="stats.js"></script>
+</body>
+</html>
